@@ -33,6 +33,6 @@ typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
 typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;
 
 /* Pointer to Function returning Void (any number of parameters) */
-typedef void (*PFV)();
+typedef void (*PFV)(void);
 
 #endif  /* __TYPE_H__ */

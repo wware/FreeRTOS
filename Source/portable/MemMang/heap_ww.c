@@ -71,6 +71,10 @@ task.h is included from an application file. */
 
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
+#ifndef DBGPRINTF1
+#define DBGPRINTF1(fmt,a)
+#endif
+
 /* The free list is actually two linked lists, both running through all unallocated blocks.
    The first list orders the free blocks by size, the number of bytes available for allocation
    starting with the smallest, and is used for parsimonious allocation. The second list orders

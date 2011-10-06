@@ -259,6 +259,20 @@ extern void vPortExitCritical( void );
 #define portEXIT_CRITICAL()			vPortExitCritical();
 /*-----------------------------------------------------------*/
 
+/* Task utilities. */
+#define portEND_SWITCHING_ISR( xSwitchRequired )        \
+{                                                                                                       \
+extern void vTaskSwitchContext( void );                         \
+                                                                                                        \
+        if( xSwitchRequired )                                                   \
+        {                                                                                               \
+                vTaskSwitchContext();                                           \
+        }                                                                                               \
+}
+/*-----------------------------------------------------------*/ 
+
+
+
 /* Task function macros as described on the FreeRTOS.org WEB site. */
 #define portTASK_FUNCTION_PROTO( vFunction, pvParameters ) void vFunction( void *pvParameters )
 #define portTASK_FUNCTION( vFunction, pvParameters ) void vFunction( void *pvParameters )

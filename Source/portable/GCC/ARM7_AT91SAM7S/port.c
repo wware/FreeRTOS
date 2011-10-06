@@ -76,7 +76,7 @@
 #include "task.h"
 
 /* Processor constants. */
-#include "AT91SAM7X256.h"
+// #include "AT91SAM7X256.h"
 
 /* Constants required to setup the task context. */
 #define portINITIAL_SPSR				( ( portSTACK_TYPE ) 0x1f ) /* System mode, ARM mode, interrupts enabled. */
@@ -221,12 +221,20 @@ AT91PS_PITC pxPIT = AT91C_BASE_PITC;
 	#if configUSE_PREEMPTION == 0
 
 		extern void ( vNonPreemptiveTick ) ( void );
-		AT91F_AIC_ConfigureIt( AT91C_ID_SYS, AT91C_AIC_PRIOR_HIGHEST, portINT_LEVEL_SENSITIVE, ( void (*)(void) ) vNonPreemptiveTick );
+		AT91F_AIC_ConfigureIt( AT91C_BASE_AIC,
+                                       AT91C_ID_SYS,
+                                       AT91C_AIC_PRIOR_HIGHEST,
+                                       portINT_LEVEL_SENSITIVE,
+                                       ( void (*)(void) ) vNonPreemptiveTick );
 
 	#else
 		
 		extern void ( vPreemptiveTick )( void );
-		AT91F_AIC_ConfigureIt( AT91C_ID_SYS, AT91C_AIC_PRIOR_HIGHEST, portINT_LEVEL_SENSITIVE, ( void (*)(void) ) vPreemptiveTick );
+		AT91F_AIC_ConfigureIt( AT91C_BASE_AIC,
+                                       AT91C_ID_SYS,
+                                       AT91C_AIC_PRIOR_HIGHEST,
+                                       portINT_LEVEL_SENSITIVE,
+                                       ( void (*)(void) ) vPreemptiveTick );
 
 	#endif
 
